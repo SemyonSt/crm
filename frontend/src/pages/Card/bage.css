@@ -1,0 +1,31 @@
+.bage {
+    margin-top: 5px;
+    padding: 0;
+    box-sizing: border-box;
+    max-height: 150px;
+    max-width: 250px;
+}
+.body {
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    
+}
+
+.head {
+    display: flex;
+    justify-content:space-between;
+    align-items: center;
+}
+
+.name {
+    font-size: 12px;
+}
+
+.date {
+    font-size: 10px;
+}
+.status {
+    font-size: 10px;
+}
