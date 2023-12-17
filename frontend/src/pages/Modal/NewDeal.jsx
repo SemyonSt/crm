@@ -14,7 +14,7 @@ function MyVerticallyCenteredModal(props) {
         >
             <Modal.Header closeButton>
                 <Modal.Title id="contained-modal-title-vcenter">
-                    Новая задача
+                    Новая сделка
                 </Modal.Title>
             </Modal.Header>
             <Modal.Body>

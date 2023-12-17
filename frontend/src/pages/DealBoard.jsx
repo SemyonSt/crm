@@ -2,8 +2,10 @@ import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 
-import Bage from './Card/Bage';
-import MyVerticallyCenteredModal from './Modal/NewTask'
+import Bage from './CardDealBoard/Bage';
+import MyVerticallyCenteredModal from './Modal/NewDeal'
+
+//сделать через один массив, но с разными статусами (сортировка по статусам)
 
 const unassignedCards = [
     { id: 1, name: 'Иван', phone: '+7 925 123 25', status: false, description: 'Фортепиано' },

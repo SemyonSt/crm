@@ -1,0 +1,48 @@
+.bage {
+    margin-top: 5px;
+    padding: 0;
+    box-sizing: border-box;
+    max-height: 150px;
+    max-width: 250px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
+}
+.bage:hover {
+    background-color: #47b0ec;
+    transform: translateY(-2px);
+}
+.bage:active {
+    background-color: #2882b6;
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.5);
+    
+  }
+.body {
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.head {
+    display: flex;
+    justify-content:space-between;
+    align-items: center;
+}
+
+.name {
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.date {
+    font-size: 10px;
+}
+.status {
+    font-size: 10px;
+    font-weight: bold;
+}
+
+.description {
+    font-size: 12px;
+}
