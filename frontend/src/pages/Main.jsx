@@ -8,7 +8,7 @@ import Student from "./Student";
 import DealBoard from "./DealBoard";
 import Login from "./Login";
 import StudentList from "./Students";
-import EmployeeList from "./EmployeeList";
+import TeacherList from "./Teachers";
 import TaskManager from "./TaskManager";
 import ScheduleCalendar from "./ScheduleCalendar";
 import Reports from "./Reports";
@@ -30,7 +30,7 @@ const Main = () => {
           <Route path='/task-manager' element={<TaskManager />} />
           <Route path='/calendar' element={<ScheduleCalendar />} />
           <Route path='/students' element={<StudentList />} />
-          <Route path='/employees' element={<EmployeeList />} />
+          <Route path='/teachers' element={<TeacherList />} />
           <Route path='/reports' element={<Reports />} />
           <Route path='*' element={<Error />} />
         </Routes>
