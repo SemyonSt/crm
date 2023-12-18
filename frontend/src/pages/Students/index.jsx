@@ -6,12 +6,12 @@ import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import {CashStack} from 'react-bootstrap-icons';
-import { teachers } from "../EmployeeList/data";
+import { teachers } from "../Teachers/data";
 import { students } from "./data";
 
 const StudentList = () => {
   return <Container className="fluid mt-3">
-    <Row className="fluid mb-3">
+    <Row className="mb-3">
       <Col>
         <InputGroup>
           <Form.Control
