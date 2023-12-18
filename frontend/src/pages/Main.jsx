@@ -7,7 +7,7 @@ import Order from "./Order";
 import Student from "./Student";
 import DealBoard from "./DealBoard";
 import Login from "./Login";
-import StudentList from "./StudentList";
+import StudentList from "./Students";
 import EmployeeList from "./EmployeeList";
 import TaskManager from "./TaskManager";
 import ScheduleCalendar from "./ScheduleCalendar";
