@@ -56,8 +56,8 @@ const DealBoard = () => {
             const draggedCard = mass.find((item) => item.id === parseInt(data.id));
             if (draggedCard) {
                 updateStatusInArray(draggedCard.id, newStatus);
-                setDraggedId(null); 
-                setDragOverColumn(null); 
+                setDraggedId(null);
+                setDragOverColumn(null);
             }
         }
     };
