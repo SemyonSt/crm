@@ -15,7 +15,7 @@ const mass = [
     { id: 4, name: 'Школа музыки', phone: '+7 925 123 25',  description: 'Вокал', status: 'Встреча состоялась' },
 ];
 
-const DealBoard = () => {
+const DealBoard = ({className}) => {
 
     const [modalShow, setModalShow] = React.useState(false);
 
@@ -51,7 +51,7 @@ const DealBoard = () => {
         })
 
         return (
-            <Row>
+            <Row className={className}>
                 <Col>
                     <h3 style={{ height: '50px', textAlign: 'center', fontSize: '20px', padding: '5px' }}>Неразобранные</h3>
                     {renderCards(unassignedCards)}
