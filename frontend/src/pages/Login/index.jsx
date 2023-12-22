@@ -6,9 +6,8 @@ import Alert from 'react-bootstrap/Alert';
 
 import "./styles.scss";
 
-const Login = () => {
+const Login = ({user, setUser}) => {
   const navigate = useNavigate();
-  const [user, setUser] = useState({login: "", password: ""});
   const [show, setShow] = useState(false);
 
   const handleSubmit = (event) => {
@@ -18,9 +17,9 @@ const Login = () => {
 
     if (user.login !== "admin" || user.password !== "admin") {
       setShow(true);
+    } else {
+      navigate("/deal-board");
     }
-
-    navigate("/deal-board");
   };
 
   return <div className=".full-page-container d-flex align-items-center justify-content-center h-100">

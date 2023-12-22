@@ -32,6 +32,7 @@
 
 .name {
     font-size: 12px;
+    font-weight: bold;
 }
 
 .date {
@@ -39,4 +40,9 @@
 }
 .status {
     font-size: 10px;
+    font-weight: bold;
+}
+
+.description {
+    font-size: 12px;
 }

@@ -1,38 +1,12 @@
 import React from 'react';
-import './bage.scss'
+import './bage.css'
 import { Card } from 'react-bootstrap';
 
-const Bage = (card) => {
+const Bage = (card, handleDragStart) => {
 
-
-    function dragStartHandler(e, card) {
-        console.log('drag', card.name)
-    }
-
-    function dragEndhendler(e) {
-
-    }
-
-    function dragEndhendler(e) {
-
-    }
-
-    function dragOverhandler(e) {
-        e.preventDefault()
-    }
-
-    function dropHandler(e, card) {
-        e.preventDefault()
-        console.log('drop', card.name)
-
-    }
     return (
         <Card
-            onDragStart={(e) => dragStartHandler(e, card) }
-            onDragLeave={(e) =>  dragEndhendler(e)}
-            onDragEnd={(e) =>  dragEndhendler(e)}
-            onDragOver={(e) =>  dragOverhandler(e)}
-            onDrop={(e) =>  dropHandler(e, card)}
+            onDragStart={(e) => handleDragStart(e, card.id)}
             draggable={true}
             className='bage unassembled'
             key={card.id}

@@ -1,16 +1,18 @@
 import { Col } from "react-bootstrap";
 import Menu from "../components/menu";
-import { Outlet } from "react-router-dom";
+import { Outlet, Navigate } from "react-router-dom";
 
-const Layout = () => {
-  return <div className="row">
+const Layout = ({ user }) => {
+  return user.login ? (<div className="row">
     <Col className="col-1">
       <Menu/>
     </Col>
     <Col className="col-11">
       <Outlet/>
     </Col>
-  </div>
+  </div>) : (
+    <Navigate to="/login" />
+  )
 };
 
 export default Layout;
