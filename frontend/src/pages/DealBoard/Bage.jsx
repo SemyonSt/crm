@@ -13,17 +13,15 @@ const Bage = (card, handleDragStart) => {
             style={{ padding: 0 }
             }>
             <div className='body'>
-                <div className='name'>от: {card.name}</div>
+                <div className='orderName'>
+                    {card.orderName}
+                </div>
+                <div className='clientName'>
+                    {card.clientName}
+                </div>
                 <div className='phone'>
                     {card.phone}
                 </div>
-                <div className='status'>
-                    {card.description}
-                </div>
-                {/* <div className='status'>
-                 
-                    Статус: {card.status ? "Есть задачи" : "Нет задач"}
-                </div> */}
             </div>
         </Card>
     )
