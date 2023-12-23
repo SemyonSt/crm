@@ -1,35 +1,28 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 import './board.scss'
 
 import Bage from './Bage';
 import MyVerticallyCenteredModal from '../Modal/NewDeal'
+import { useSelector } from 'react-redux';
 
-
-const initialMass = [
-    { id: 1, orderName: 'Школа музыки', clientName: "Маркова Наталия", phone: '+7 925 123 25',  status: 'UNPROCESSED', created_at: '2023-12-18T14:45:00' },
-    { id: 2, orderName: 'Школа музыки', clientName: "Маркова Наталия", phone: '+7 925 123 25',  status: 'SCHEDULE_APPOINTMENT', created_at: '2023-12-18T16:30:00' },
-    { id: 3, orderName: 'Людмила', clientName: "Маркова Наталия", phone: '+7 925 123 25', status: 'APPOINTMENT_SCHEDULED', created_at: "2023-12-25T15:30:00" },
-    { id: 4, orderName: 'Саша', clientName: "Маркова Наталия", phone: '+7 925 123 25', status: 'APPOINTMENT_COMPLETED', created_at: "2023-12-18T17:30:00" },
-    { id: 5, orderName: 'Марина', clientName: "Маркова Наталия", phone: '+7 925 123 25', status: 'RESERVED', created_at: "2023-12-18T17:32:00" },
-    { id: 6, orderName: 'Никола', clientName: "Маркова Наталия", phone: '+7 925 123 25', status: 'APPOINTMENT_COMPLETED', created_at: "2023-12-18T15:31:00" },
-    { id: 7, orderName: 'Никола', clientName: "Маркова Наталия", phone: '+7 925 123 25', status: 'APPOINTMENT_COMPLETED', created_at: "2023-12-18T15:30:00" },
-    { id: 8, orderName: "Фортепиано/Глинина", clientName: "Маркова Наталия", phone: "+79119119191", status: "SCHEDULE_APPOINTMENT", created_at: "2023-12-18T14:30:00" },
-    { id: 9, orderName: "Фортепиано/Марина", clientName: "Маркова Наталия", phone: "+79119119191", status: "SCHEDULE_APPOINTMENT", created_at: "2023-12-18T10:30:00" },
-];
 
 const DealBoard = () => {
-
-    const sortedByDateTime = initialMass.sort((a, b) => {
-        return new Date(a.created_at).getTime() - new Date(b.created_at).getTime();
-      });
+    const initialDeals = useSelector((state) => state.dealsReducer.initialMass);
+    const [mass, setMass] = useState(initialDeals);
 
     const [modalShow, setModalShow] = useState(false)
-    const [mass, setMass] = useState(sortedByDateTime);
     const [draggedId, setDraggedId] = useState(null);
-
     const [dragOverColumn, setDragOverColumn] = useState(null);
+
+    useEffect(() => {
+        const sortedByDateTime = [...initialDeals].sort((a, b) => {
+            return new Date(a.created_at).getTime() - new Date(b.created_at).getTime();
+        });
+        setMass(sortedByDateTime);
+    }, [initialDeals]);
+
 
     const handleDragOver = (e, column) => {
         e.preventDefault();
