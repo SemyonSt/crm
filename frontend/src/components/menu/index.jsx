@@ -2,12 +2,12 @@ import { Calendar3, CardList, Coin, FileEarmark, PersonCircle, PersonFill, Perso
 import Nav from 'react-bootstrap/Nav';
 import { Link } from "react-router-dom";
 const menu = [
-  {
-    id: 1,
-    name: "Аккаунт",
-    icon: <PersonCircle/>,
-    to: "/"
-  },
+  // {
+  //   id: 1,
+  //   name: "Аккаунт",
+  //   icon: <PersonCircle/>,
+  //   to: "/"
+  // },
   {
     id: 2,
     name: "Сделки",
@@ -36,7 +36,7 @@ const menu = [
     id: 6,
     name: "Сотрудники",
     icon: <Person/>,
-    to: "/employees",
+    to: "/teachers",
   },
   {
     id: 7,

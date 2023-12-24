@@ -5,7 +5,6 @@ import InputGroup from 'react-bootstrap/InputGroup';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-import {CashStack} from 'react-bootstrap-icons';
 import { teachers } from "../Teachers/data";
 
 

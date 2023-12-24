@@ -28,6 +28,7 @@ const Order = () => {
     <>
       <Modal show={show} size="xl">
         <Modal.Header closeButton>
+          <h1>Изменить сделку</h1>
         </Modal.Header>
         <Modal.Body>
           <Container>

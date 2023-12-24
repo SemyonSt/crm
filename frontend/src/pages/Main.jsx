@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Container from 'react-bootstrap/Container';
 
@@ -13,18 +13,16 @@ import TaskManager from "./TaskManager";
 import ScheduleCalendar from "./ScheduleCalendar";
 import Reports from "./Reports";
 import Menu from "../components/menu";
+import Layout from "./Layout";
 
 const Main = () => {
+  const [user, setUser] = useState({login: "", password: ""});
 
   return (
-    <div className="h-100">
-        {/* <aside className="col-md-2">
-          <Menu/>
-        </aside> */}
-
-        <Routes>
-          <Route path='/' element={<Login />} />
-          <Route path='/deal-board' element={<DealBoard />} />
+      <Routes>
+        <Route path="/login" element={<Login user={user} setUser={setUser}/>}/>
+        {<Route path="/" element={<Layout user={user}/>}>
+          <Route path='/deal-board' element={<DealBoard/>} />
           <Route path='/order' element={<Order />} />
           <Route path='/student' element={<Student />} />
           <Route path='/task-manager' element={<TaskManager />} />
@@ -33,9 +31,8 @@ const Main = () => {
           <Route path='/teachers' element={<TeacherList />} />
           <Route path='/reports' element={<Reports />} />
           <Route path='*' element={<Error />} />
-        </Routes>
-
-    </div>
+        </Route>}
+      </Routes>
   );
 }
 
