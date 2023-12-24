@@ -1,11 +1,15 @@
 import React from 'react';
-import './bage.css'
+import { Link } from "react-router-dom";
 import { Card } from 'react-bootstrap';
+
+import './bage.css'
+
 
 const Bage = (card, handleDragStart) => {
 
-    return (
-        <Card
+  return (
+    <Link to={`/orders/${card.id}`}>
+      <Card
             onDragStart={(e) => handleDragStart(e, card.id)}
             draggable={true}
             className='bage unassembled'
@@ -24,8 +28,8 @@ const Bage = (card, handleDragStart) => {
                 </div>
             </div>
         </Card>
-    )
-
+    </Link>
+  )
 }
 
 export default Bage;

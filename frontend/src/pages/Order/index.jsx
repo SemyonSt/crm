@@ -1,17 +1,34 @@
+import { useState } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import { order } from "./data";
+import { formatDate } from "../../helpers";
 
-const orderStatuses = [
-  {id: 0, status: "Первичный контакт"},
-  {id: 1, status: "Переговоры"},
-  {id: 2, status: "Принимают решение"},
-  {id: 3, status: "Согласование договора"},
-  {id: 4, status: "Успешно реализовано"},
-  {id: 5,   status: "Закрыто и не реализовано"},
+const statusObj = {
+  UNPROCESSED: "Неразобранное",
+  SCHEDULE_APPOINTMENT: "Назначить встречу",
+  APPOINTMENT_SCHEDULED: "Встреча назначена",
+  APPOINTMENT_COMPLETED: "Встреча состоялась",
+  SUCCESSFULLY_COMPLETED: "Успешно реализована",
+  POOR_LEAD: "Плохая заявка",
+  REFUSED_TO_PURCHASE: "Отказался покупать",
+  RESERVED: "Резерв"
+}
+
+const options = [
+  {id: 0, status: "UNPROCESSED"},
+  {id: 1, status: "SCHEDULE_APPOINTMENT"},
+  {id: 2, status: "APPOINTMENT_SCHEDULED"},
+  {id: 3, status: "APPOINTMENT_COMPLETED"},
+  {id: 4, status: "SUCCESSFULLY_COMPLETED"},
+  {id: 5, status: "POOR_LEAD"},
+  {id: 6, status: "REFUSED_TO_PURCHASE"},
+  {id: 7, status: "RESERVED"},
 ]
 
 const logs = [
@@ -22,11 +39,19 @@ const logs = [
 ]
 
 const Order = () => {
-  const show = true;
+  const [show, setShow] = useState(true);
+  const navigate = useNavigate();
+
+  const handleClose = () => {
+    setShow(prevState => !prevState);
+    navigate("/orders")
+  }
+
+  const { orderName, clientName, phone, requestSource, status, created_at, logInfo} = order;
 
   return (
     <>
-      <Modal show={show} size="xl">
+      <Modal show={show} size="xl" onHide={handleClose}>
         <Modal.Header closeButton>
           <h1>Изменить сделку</h1>
         </Modal.Header>
@@ -36,35 +61,51 @@ const Order = () => {
               <Col md={4}>
                 <Form>
                   <Form.Group className="mb-3">
-                    <Form.Control type="text" placeholder="Сделка" value="Сделка 1"/>
+                    <Form.Control type="text" placeholder="Сделка" value={orderName}/>
                   </Form.Group>
                   <Form.Group className="mb-3">
-                    <Form.Control type="text" placeholder="+7 911 934 43 32" value="+7 911 934 43 32"/>
+                    <Form.Control type="text" placeholder={phone} value={phone}/>
                   </Form.Group>
-                  <Form.Select aria-label="Transaction status">
-                    {orderStatuses.map((item) => <option value={item.status}>{item.status}</option>)}
+                  <Form.Select aria-label="Transaction status" value={status} className="mb-3">
+                    {options.map((item) => <option value={item.status}>{statusObj[item.status]}</option>)}
                   </Form.Select>
-                  <Button variant="primary" type="button" className="mt-3">
-                    Добавить в ученики
-                  </Button>
+                  <Form.Group className="mb-3">
+                    <Form.Control type="text" placeholder="Клиент" value={clientName}/>
+                  </Form.Group>
+                  <Form.Group className="mb-3">
+                    <Form.Control type="text" placeholder="Откуда у нас узнали?" value={requestSource}/>
+                  </Form.Group>
+                  <Form.Group className="mb-3 d-flex justify-content-end">
+                    <Button variant="primary" type="button" className="mt-3 mx-2">
+                      Сохранить
+                    </Button>
+                    <Button variant="primary" type="button" className="mt-3">
+                      Отменить
+                    </Button>
+                  </Form.Group>
                 </Form>
               </Col>
               <Col md={8}>
-                <Button variant="primary" type="button">
-                  Добавить задучу
-                </Button>
-                <div className="card mt-3 p-2">
-                  {logs.map((item) => <p key={item.id}>
-                    <span className="mx-1 d-inline-block">{item.date}</span>
-                    <span className="mx-1 d-inline-block">{item.createdBy}</span>
-                    <span className="mx-1 d-inline-block">{item.message}</span>
+                <div className="card p-2">
+                  {logInfo.map((item) => <p key={item.id}>
+                    <span className="mx-1 d-inline-block">{formatDate(item.createDateTime)} - </span>
+                    <span className="mx-1 d-inline-block">{item.adminName} - </span>
+                    <span className="mx-1 d-inline-block">{item.description}</span>
                   </p>)}
                 </div>
                 <Form>
                   <Form.Group className="mt-3">
-                    <Form.Control as="textarea" />
+                    <Form.Control as="textarea" placeholder="Комментарии"/>
+                  </Form.Group>
+                  <Form.Group className="mt-3">
                     <Button variant="primary" type="button" className="mt-3">
                       Добавить комментарии
+                    </Button>
+                    <Button variant="primary" type="button" className="mt-3 mx-2">
+                      Добавить задачу
+                    </Button>
+                    <Button variant="primary" type="button" className="mt-3">
+                      Добавить в ученики
                     </Button>
                   </Form.Group>
                 </Form>

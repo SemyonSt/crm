@@ -1,3 +1,5 @@
+import { useState } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
@@ -32,11 +34,18 @@ const logs = [
  ]
 
 const Student = () => {
-  const show = true;
+  let { id } = useParams();
+  const [show, setShow] = useState(true);
+  const navigate = useNavigate();
+
+  const handleClose = () => {
+    setShow(prevState => !prevState);
+    navigate("/students")
+  }
 
   return (
     <>
-      <Modal show={show} size="xl">
+      <Modal show={show} size="xl" onHide={handleClose}>
         <Modal.Header closeButton>
         </Modal.Header>
         <Modal.Body>

@@ -12,7 +12,7 @@ const menu = [
     id: 2,
     name: "Сделки",
     icon: <Coin/>,
-    to: "/deal-board"
+    to: "/orders"
   },
   {
     id: 3,
