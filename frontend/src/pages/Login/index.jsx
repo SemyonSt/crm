@@ -18,7 +18,7 @@ const Login = ({user, setUser}) => {
     if (user.login !== "admin" || user.password !== "admin") {
       setShow(true);
     } else {
-      navigate("/deal-board");
+      navigate("/orders");
     }
   };
 

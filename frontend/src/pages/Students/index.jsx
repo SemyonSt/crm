@@ -7,7 +7,9 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import {CashStack} from 'react-bootstrap-icons';
 import { teachers } from "../Teachers/data";
+import { Link } from "react-router-dom";
 import { students } from "./data";
+import "./styles.scss"
 
 const StudentList = () => {
   return <Container className="fluid mt-3">
@@ -50,7 +52,7 @@ const StudentList = () => {
           <tbody>
             {students.map(student => <tr>
               <td>{student.id + 1}</td>
-              <td>{`${student.first_name} ${student.last_name}`}</td>
+              <td><Link to={`/students/${student.id}`}>{`${student.first_name} ${student.last_name}`}</Link></td>
               <td>{student.balance}</td>
               <td>{student.abonement_id}</td>
               <td>{student.phone}</td>

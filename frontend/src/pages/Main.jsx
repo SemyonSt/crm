@@ -22,12 +22,13 @@ const Main = () => {
       <Routes>
         <Route path="/login" element={<Login user={user} setUser={setUser}/>}/>
         {<Route path="/" element={<Layout user={user}/>}>
-          <Route path='/deal-board' element={<DealBoard/>} />
-          <Route path='/order' element={<Order />} />
-          <Route path='/student' element={<Student />} />
+          <Route path='/orders' element={<DealBoard/>} />
+          <Route path='/orders/:id' element={<Order />} />
+
           <Route path='/task-manager' element={<TaskManager />} />
           <Route path='/calendar' element={<ScheduleCalendar />} />
           <Route path='/students' element={<StudentList />} />
+          <Route path='/students/:id' element={<Student />} />
           <Route path='/teachers' element={<TeacherList />} />
           <Route path='/reports' element={<Reports />} />
           <Route path='*' element={<Error />} />
