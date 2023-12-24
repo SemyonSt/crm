@@ -86,10 +86,7 @@ const Order = () => {
                 </Form>
               </Col>
               <Col md={8}>
-                <Button variant="primary" type="button">
-                  Добавить задучу
-                </Button>
-                <div className="card mt-3 p-2">
+                <div className="card p-2">
                   {logInfo.map((item) => <p key={item.id}>
                     <span className="mx-1 d-inline-block">{formatDate(item.createDateTime)} - </span>
                     <span className="mx-1 d-inline-block">{item.adminName} - </span>
@@ -98,7 +95,7 @@ const Order = () => {
                 </div>
                 <Form>
                   <Form.Group className="mt-3">
-                    <Form.Control as="textarea" />
+                    <Form.Control as="textarea" placeholder="Комментарии"/>
                   </Form.Group>
                   <Form.Group className="mt-3">
                     <Button variant="primary" type="button" className="mt-3">

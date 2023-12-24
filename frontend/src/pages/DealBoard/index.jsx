@@ -1,30 +1,28 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 import './board.scss'
 
 import Bage from './Bage';
 import MyVerticallyCenteredModal from '../Modal/NewDeal'
+import { useSelector } from 'react-redux';
 
-
-const initialMass = [
-    { id: 1, name: 'Иван', phone: '+7 925 123 25', description: 'Фортепиано', status: 'Неразобранные' },
-    { id: 2, name: 'Школа музыки', phone: '+7 925 123 25', description: 'Гитара', status: 'Назначить встречу' },
-    { id: 3, name: 'Людмила', phone: '+7 925 123 25', description: 'Вокал', status: 'Встреча назначена' },
-    { id: 4, name: 'Саша', phone: '+7 925 123 25', description: 'Вокал', status: 'Встреча состоялась' },
-    { id: 5, name: 'Марина', phone: '+7 925 123 25', description: 'Вокал', status: 'Резерв' },
-    { id: 6, name: 'Никола', phone: '+7 925 123 25', description: 'Вокал', status: 'Встреча состоялась' },
-    { id: 7, name: 'Никола', phone: '+7 925 123 25', description: 'Вокал', status: 'Встреча состоялась' },
-];
 
 const DealBoard = () => {
+    const initialDeals = useSelector((state) => state.dealsReducer.initialMass);
+    const [mass, setMass] = useState(initialDeals);
 
     const [modalShow, setModalShow] = useState(false)
-
-    const [mass, setMass] = useState(initialMass);
     const [draggedId, setDraggedId] = useState(null);
-
     const [dragOverColumn, setDragOverColumn] = useState(null);
+
+    useEffect(() => {
+        const sortedByDateTime = [...initialDeals].sort((a, b) => {
+            return new Date(a.created_at).getTime() - new Date(b.created_at).getTime();
+        });
+        setMass(sortedByDateTime);
+    }, [initialDeals]);
+
 
     const handleDragOver = (e, column) => {
         e.preventDefault();
@@ -76,19 +74,19 @@ const DealBoard = () => {
         const reservedCards = [];
 
         mass.forEach(task => {
-            if (task.status === 'Неразобранные') {
+            if (task.status === 'UNPROCESSED') {
                 unassignedCards.push(task)
             }
-            if (task.status === 'Назначить встречу') {
+            if (task.status === 'SCHEDULE_APPOINTMENT') {
                 scheduleMeetingCards.push(task)
             }
-            if (task.status === 'Встреча назначена') {
+            if (task.status === 'APPOINTMENT_SCHEDULED') {
                 meetingScheduledCards.push(task)
             }
-            if (task.status === 'Встреча состоялась') {
+            if (task.status === 'APPOINTMENT_COMPLETED') {
                 meetingDoneCards.push(task)
             }
-            if (task.status === 'Резерв') {
+            if (task.status === 'RESERVED') {
                 reservedCards.push(task)
             }
         })
@@ -96,52 +94,52 @@ const DealBoard = () => {
         return (
             <Row>
                 <Col
-                    className={dragOverColumn === 'Неразобранные' ? 'drag-over' : ''}
-                    onDrop={(e) => handleDrop(e, 'Неразобранные')}
-                    onDragOver={(e) => handleDragOver(e, 'Неразобранные')}
+                    className={dragOverColumn === 'UNPROCESSED' ? 'drag-over' : ''}
+                    onDrop={(e) => handleDrop(e, 'UNPROCESSED')}
+                    onDragOver={(e) => handleDragOver(e, 'UNPROCESSED')}
                     onDragLeave={() => handleDragLeave()}
-                    style={{height: '100vh', borderRadius: '20px'}}
+                    style={{ height: '100vh', borderRadius: '20px' }}
                 >
                     <h3 style={{ height: '50px', textAlign: 'center', fontSize: '20px', padding: '5px' }}>Неразобранные</h3>
                     {renderCards(unassignedCards)}
                 </Col>
                 <Col
-                    className={dragOverColumn === 'Назначить встречу' ? 'drag-over' : ''}
-                    onDrop={(e) => handleDrop(e, 'Назначить встречу')}
-                    onDragOver={(e) => handleDragOver(e, 'Назначить встречу')}
+                    className={dragOverColumn === 'SCHEDULE_APPOINTMENT' ? 'drag-over' : ''}
+                    onDrop={(e) => handleDrop(e, 'SCHEDULE_APPOINTMENT')}
+                    onDragOver={(e) => handleDragOver(e, 'SCHEDULE_APPOINTMENT')}
                     onDragLeave={() => handleDragLeave()}
-                    style={{height: '100vh', borderRadius: '20px'}}
-                    >
+                    style={{ height: '100vh', borderRadius: '20px' }}
+                >
                     <h3 style={{ height: '50px', textAlign: 'center', fontSize: '20px', padding: '5px' }}>Назначить встречу</h3>
                     {renderCards(scheduleMeetingCards)}
                 </Col>
                 <Col
-                    className={dragOverColumn === 'Встреча назначена' ? 'drag-over' : ''}
-                    onDrop={(e) => handleDrop(e, 'Встреча назначена')}
-                    onDragOver={(e) => handleDragOver(e, 'Встреча назначена')}
+                    className={dragOverColumn === 'APPOINTMENT_SCHEDULED' ? 'drag-over' : ''}
+                    onDrop={(e) => handleDrop(e, 'APPOINTMENT_SCHEDULED')}
+                    onDragOver={(e) => handleDragOver(e, 'APPOINTMENT_SCHEDULED')}
                     onDragLeave={() => handleDragLeave()}
-                    style={{height: '100vh', borderRadius: '20px'}}
-                    >
+                    style={{ height: '100vh', borderRadius: '20px' }}
+                >
                     <h3 style={{ height: '50px', textAlign: 'center', fontSize: '20px', padding: '5px' }}>Встреча назначена</h3>
                     {renderCards(meetingScheduledCards)}
                 </Col>
                 <Col
-                    className={dragOverColumn === 'Встреча состоялась' ? 'drag-over' : ''}
-                    onDrop={(e) => handleDrop(e, 'Встреча состоялась')}
-                    onDragOver={(e) => handleDragOver(e, 'Встреча состоялась')}
+                    className={dragOverColumn === 'APPOINTMENT_COMPLETED' ? 'drag-over' : ''}
+                    onDrop={(e) => handleDrop(e, 'APPOINTMENT_COMPLETED')}
+                    onDragOver={(e) => handleDragOver(e, 'APPOINTMENT_COMPLETED')}
                     onDragLeave={() => handleDragLeave()}
-                    style={{height: '100vh', borderRadius: '20px'}}
-                    >
+                    style={{ height: '100vh', borderRadius: '20px' }}
+                >
                     <h3 style={{ height: '50px', textAlign: 'center', fontSize: '20px', padding: '5px' }}>Встреча состоялась</h3>
                     {renderCards(meetingDoneCards)}
                 </Col>
                 <Col
-                    className={dragOverColumn === 'Резерв' ? 'drag-over' : ''}
-                    onDrop={(e) => handleDrop(e, 'Резерв')}
-                    onDragOver={(e) => handleDragOver(e, 'Резерв')}
+                    className={dragOverColumn === 'RESERVED' ? 'drag-over' : ''}
+                    onDrop={(e) => handleDrop(e, 'RESERVED')}
+                    onDragOver={(e) => handleDragOver(e, 'RESERVED')}
                     onDragLeave={() => handleDragLeave()}
-                    style={{height: '100vh', borderRadius: '20px'}}
-                    >
+                    style={{ height: '100vh', borderRadius: '20px' }}
+                >
                     <h3 style={{ height: '50px', textAlign: 'center', fontSize: '20px', padding: '5px' }}>Резерв</h3>
                     {renderCards(reservedCards)}
                 </Col>

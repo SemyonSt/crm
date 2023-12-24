@@ -24,25 +24,15 @@
     justify-content: center;
 }
 
-.head {
-    display: flex;
-    justify-content:space-between;
-    align-items: center;
-}
 
-.name {
-    font-size: 12px;
+.orderName {
+    font-size: 13px;
     font-weight: bold;
 }
 
-.date {
-    font-size: 10px;
-}
-.status {
+
+.clientName {
     font-size: 10px;
     font-weight: bold;
 }
 
-.description {
-    font-size: 12px;
-}
