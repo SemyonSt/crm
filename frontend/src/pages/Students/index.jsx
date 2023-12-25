@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from 'react';
 import Table from 'react-bootstrap/Table';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
@@ -8,10 +9,15 @@ import Button from 'react-bootstrap/Button';
 import {CashStack} from 'react-bootstrap-icons';
 import { teachers } from "../Teachers/data";
 import { Link } from "react-router-dom";
-import { students } from "./data";
+
 import "./styles.scss"
+import { useSelector } from 'react-redux';
+
 
 const StudentList = () => {
+  const initialStudents = useSelector((state) => state.studentsReducer.initialMass);
+  const [mass, setMass] = useState(initialStudents);
+
   return <Container className="fluid mt-3">
     <Row className="mb-3">
       <Col>
@@ -50,7 +56,7 @@ const StudentList = () => {
             </tr>
           </thead>
           <tbody>
-            {students.map(student => <tr>
+            {mass.map(student => <tr>
               <td>{student.id + 1}</td>
               <td><Link to={`/students/${student.id}`}>{`${student.first_name} ${student.last_name}`}</Link></td>
               <td>{student.balance}</td>

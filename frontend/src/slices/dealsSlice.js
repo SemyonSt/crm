@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { initialMass } from './dataDeals';
+import { initialMass } from './data/dataDeals';
 
 const initialState = {
     initialMass: initialMass,
@@ -9,7 +9,9 @@ const dealsSlice = createSlice({
     name: 'deals',
     initialState,
     reducers: {
-
+        addDeals(state, { payload }) {
+            state.initialMass.push(payload)
+        }
     }
 })
 

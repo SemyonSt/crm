@@ -4,8 +4,10 @@ import Button from 'react-bootstrap/Button';
 import './board.scss'
 
 import Bage from './Bage';
-import MyVerticallyCenteredModal from '../Modal/NewDeal'
+import NewDealModal from '../Modal/NewDeal'
 import { useSelector } from 'react-redux';
+
+import axios from 'axios';
 
 
 const DealBoard = () => {
@@ -24,6 +26,7 @@ const DealBoard = () => {
     }, [initialDeals]);
 
 
+
     const handleDragOver = (e, column) => {
         e.preventDefault();
         setDragOverColumn(column);
@@ -34,6 +37,7 @@ const DealBoard = () => {
     };
 
     const updateStatusInArray = (id, newStatus) => {
+        console.log(id)
         setMass((prevMass) =>
             prevMass.map((item) =>
                 item.id === id ? { ...item, status: newStatus } : item
@@ -77,7 +81,7 @@ const DealBoard = () => {
             if (task.status === 'UNPROCESSED') {
                 unassignedCards.push(task)
             }
-            if (task.status === 'SCHEDULE_APPOINTMENT') {
+            if (task.status === 'SUCCESSFULLY_COMPLETED') {
                 scheduleMeetingCards.push(task)
             }
             if (task.status === 'APPOINTMENT_SCHEDULED') {
@@ -91,8 +95,22 @@ const DealBoard = () => {
             }
         })
 
+        // const fetchData = async () => {
+        //     try {
+        //       const response = await axios.get('/api/v1/orders');
+        //       console.log('Успешно получено:', response.data);
+        //     } catch (error) {
+        //       console.error('Ошибка при отправке запроса!!!!', error);
+        //     }
+        //   };
+
+
+
         return (
             <Row>
+                {/* <div>
+                    <button onClick={fetchData}>Запросить данные</button>
+                </div> */}
                 <Col
                     className={dragOverColumn === 'UNPROCESSED' ? 'drag-over' : ''}
                     onDrop={(e) => handleDrop(e, 'UNPROCESSED')}
@@ -104,8 +122,8 @@ const DealBoard = () => {
                     {renderCards(unassignedCards)}
                 </Col>
                 <Col
-                    className={dragOverColumn === 'SCHEDULE_APPOINTMENT' ? 'drag-over' : ''}
-                    onDrop={(e) => handleDrop(e, 'SCHEDULE_APPOINTMENT')}
+                    className={dragOverColumn === 'SUCCESSFULLY_COMPLETED' ? 'drag-over' : ''}
+                    onDrop={(e) => handleDrop(e, 'SUCCESSFULLY_COMPLETED')}
                     onDragOver={(e) => handleDragOver(e, 'SCHEDULE_APPOINTMENT')}
                     onDragLeave={() => handleDragLeave()}
                     style={{ height: '100vh', borderRadius: '20px' }}
@@ -155,7 +173,7 @@ const DealBoard = () => {
             </Button>
             {render()}
 
-            <MyVerticallyCenteredModal
+            <NewDealModal
                 show={modalShow}
                 onHide={() => setModalShow(false)}
             />

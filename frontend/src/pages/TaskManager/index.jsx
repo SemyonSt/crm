@@ -3,7 +3,7 @@ import { Container, Row, Col } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 
 import Bage from './BageNewTask';
-import MyVerticallyCenteredModal from '../Modal/NewDeal'
+import NewTaskModal from '../Modal/NewTask';
 
 const mass = [
   { id: 1, name: 'Муратова Диана 15/Наталья', status: 'На сегодня', description: 'Фортепиано123', endDateTime: '14.09.2023' },
@@ -79,7 +79,7 @@ const TasksBoard = () => {
       </Col>
       {render()}
 
-      <MyVerticallyCenteredModal
+      <NewTaskModal
         show={modalShow}
         onHide={() => setModalShow(false)}
       />

@@ -17,6 +17,7 @@ const Bage = (card, handleDragStart) => {
             style={{ padding: 0 }
             }>
             <div className='body'>
+              
                 <div className='orderName'>
                     {card.orderName}
                 </div>

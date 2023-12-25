@@ -1,14 +1,19 @@
+import React from 'react';
 import Table from 'react-bootstrap/Table';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
-import InputGroup from 'react-bootstrap/InputGroup';
+// import InputGroup from 'react-bootstrap/InputGroup';
 import Col from 'react-bootstrap/Col';
-import Form from 'react-bootstrap/Form';
+// import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-import { teachers } from "../Teachers/data";
+// import { teachers } from "../Teachers/data";
+import { useSelector } from 'react-redux';
 
 
 const TeacherList = () => {
+  const initialTeachers = useSelector((state) => state.teacherReducer.initialMass);
+  // const [mass, setMass] = useState(initialTeachers);
+
   return <Container className="fluid mt-3">
     <Row className="mb-3">
       <Col>
@@ -29,7 +34,7 @@ const TeacherList = () => {
             </tr>
           </thead>
           <tbody>
-            {teachers.map(teacher => <tr>
+            {initialTeachers.map(teacher => <tr>
               <td>{teacher.id + 1}</td>
               <td>{`${teacher.first_name} ${teacher.last_name}`}</td>
               <td>{teacher.phone}</td>
