@@ -6,17 +6,21 @@ import InputGroup from 'react-bootstrap/InputGroup';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-import {CashStack} from 'react-bootstrap-icons';
+import { CashStack } from 'react-bootstrap-icons';
 import { teachers } from "../Teachers/data";
 import { Link } from "react-router-dom";
 
 import "./styles.scss"
 import { useSelector } from 'react-redux';
+import AddCashModal from '../Modal/AddCash';
+import PayAbonementModal from '../Modal/PayAbonement';
 
 
 const StudentList = () => {
   const initialStudents = useSelector((state) => state.studentsReducer.initialMass);
-  const [mass, setMass] = useState(initialStudents);
+
+  const [modalShowCash, setModalShowCash] = useState(false)
+  const [modalShowPay, setModalShowPay] = useState(false)
 
   return <Container className="fluid mt-3">
     <Row className="mb-3">
@@ -56,17 +60,17 @@ const StudentList = () => {
             </tr>
           </thead>
           <tbody>
-            {mass.map(student => <tr>
+            {initialStudents.map(student => <tr>
               <td>{student.id + 1}</td>
               <td><Link to={`/students/${student.id}`}>{`${student.first_name} ${student.last_name}`}</Link></td>
               <td>{student.balance}</td>
               <td>{student.abonement_id}</td>
               <td>{student.phone}</td>
               <td>
-                <Button variant="outline-secondary" className="mx-1">
-                  <CashStack/>
+                <Button variant="outline-secondary" className="mx-1" onClick={() => setModalShowCash(true)}>
+                  <CashStack />
                 </Button>
-                <Button variant="outline-secondary">
+                <Button variant="outline-secondary" onClick={() => setModalShowPay(true)}>
                   A
                 </Button>
               </td>
@@ -75,6 +79,15 @@ const StudentList = () => {
         </Table>
       </Col>
     </Row>
+    <AddCashModal
+      show={modalShowCash}
+      onHide={() => setModalShowCash(false)}
+    />
+
+    <PayAbonementModal
+      show={modalShowPay}
+      onHide={() => setModalShowPay(false)}
+    />
   </Container>
 }
 
