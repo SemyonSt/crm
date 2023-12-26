@@ -97,7 +97,7 @@ const DealBoard = () => {
 
         // const fetchData = async () => {
         //     try {
-        //       const response = await axios.get('/api/v1/orders');
+        //       const response = await axios.get('http://91.239.148.58:8080/api/v1/orders');
         //       console.log('Успешно получено:', response.data);
         //     } catch (error) {
         //       console.error('Ошибка при отправке запроса!!!!', error);
@@ -124,7 +124,7 @@ const DealBoard = () => {
                 <Col
                     className={dragOverColumn === 'SUCCESSFULLY_COMPLETED' ? 'drag-over' : ''}
                     onDrop={(e) => handleDrop(e, 'SUCCESSFULLY_COMPLETED')}
-                    onDragOver={(e) => handleDragOver(e, 'SCHEDULE_APPOINTMENT')}
+                    onDragOver={(e) => handleDragOver(e, 'SUCCESSFULLY_COMPLETED')}
                     onDragLeave={() => handleDragLeave()}
                     style={{ height: '100vh', borderRadius: '20px' }}
                 >

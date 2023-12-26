@@ -4,6 +4,7 @@ import Button from 'react-bootstrap/Button';
 
 import Bage from './BageNewTask';
 import NewTaskModal from '../Modal/NewTask';
+import './board.css'
 
 const mass = [
   { id: 1, name: 'Муратова Диана 15/Наталья', status: 'На сегодня', description: 'Фортепиано123', endDateTime: '14.09.2023' },
@@ -72,11 +73,10 @@ const TasksBoard = () => {
   return (
 
     < Container >
-      <Col>
-        <Button variant="primary" onClick={() => setModalShow(true)} style={{ margin: '5px' }}>
+    <Button variant="primary" onClick={() => setModalShow(true)} style={{ margin: '5px' }}>
           + Новая задача
         </Button>
-      </Col>
+      
       {render()}
 
       <NewTaskModal

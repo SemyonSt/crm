@@ -9,7 +9,7 @@ const teachersSlice = createSlice({
     name: 'deals',
     initialState,
     reducers: {
-        addStudents(state, { payload }) {
+        addTeachers(state, { payload }) {
             state.initialMass.push(payload)
         }
     }

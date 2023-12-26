@@ -1,23 +1,25 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Table from 'react-bootstrap/Table';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
-// import InputGroup from 'react-bootstrap/InputGroup';
+
 import Col from 'react-bootstrap/Col';
-// import Form from 'react-bootstrap/Form';
+
 import Button from 'react-bootstrap/Button';
-// import { teachers } from "../Teachers/data";
+
 import { useSelector } from 'react-redux';
+import NewTeacherModal from '../Modal/NewTeacher'
 
 
 const TeacherList = () => {
   const initialTeachers = useSelector((state) => state.teacherReducer.initialMass);
   // const [mass, setMass] = useState(initialTeachers);
+  const [modalShow, setModalShow] = useState(false)
 
   return <Container className="fluid mt-3">
     <Row className="mb-3">
       <Col>
-        <Button variant="primary">
+        <Button variant="primary" onClick={() => setModalShow(true)}>
           Добавить преподавателя
         </Button>
       </Col>
@@ -36,14 +38,19 @@ const TeacherList = () => {
           <tbody>
             {initialTeachers.map(teacher => <tr>
               <td>{teacher.id + 1}</td>
-              <td>{`${teacher.first_name} ${teacher.last_name}`}</td>
+              <td>{`${teacher.name}`}</td>
               <td>{teacher.phone}</td>
-              <td>{teacher.subject_id}</td>
+              <td>{teacher.subject}</td>
             </tr>)}
           </tbody>
         </Table>
       </Col>
     </Row>
+
+    <NewTeacherModal
+      show={modalShow}
+      onHide={() => setModalShow(false)}
+    />
   </Container>
 };
 

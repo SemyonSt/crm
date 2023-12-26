@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { actions as dealsActions } from '../../slices/dealsSlice';
 
 function NewTaskModal(props) {
-    const initialDeals = useSelector((state) => state.dealsReducer.initialMass);
+    // const initialDeals = useSelector((state) => state.dealsReducer.initialMass);
     const dispatch = useDispatch();
 
     const id = Math.floor(Math.random() * 100)
